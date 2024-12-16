@@ -528,26 +528,6 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>joystick</GroupName>
-          <Files>
-            <File>
-              <FileName>funct_joystick.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\Template_miki\09_sample_JOYSTICK\Source\joystick\funct_joystick.c</FilePath>
-            </File>
-            <File>
-              <FileName>joystick.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\..\Template_miki\09_sample_JOYSTICK\Source\joystick\joystick.h</FilePath>
-            </File>
-            <File>
-              <FileName>lib_joystick.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\Template_miki\09_sample_JOYSTICK\Source\joystick\lib_joystick.c</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
           <GroupName>GLCD</GroupName>
           <Files>
             <File>
@@ -579,6 +559,41 @@
               <FileName>HzLib.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\Source\GLCD\HzLib.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>pacman</GroupName>
+          <Files>
+            <File>
+              <FileName>pacman.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Source\pacman\pacman.h</FilePath>
+            </File>
+            <File>
+              <FileName>funct_board.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\pacman\funct_board.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>joystick</GroupName>
+          <Files>
+            <File>
+              <FileName>lib_joystick.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\joystick\lib_joystick.c</FilePath>
+            </File>
+            <File>
+              <FileName>joystick.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Source\joystick\joystick.h</FilePath>
+            </File>
+            <File>
+              <FileName>funct_joystick.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\joystick\funct_joystick.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1109,26 +1124,6 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>joystick</GroupName>
-          <Files>
-            <File>
-              <FileName>funct_joystick.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\Template_miki\09_sample_JOYSTICK\Source\joystick\funct_joystick.c</FilePath>
-            </File>
-            <File>
-              <FileName>joystick.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\..\Template_miki\09_sample_JOYSTICK\Source\joystick\joystick.h</FilePath>
-            </File>
-            <File>
-              <FileName>lib_joystick.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\Template_miki\09_sample_JOYSTICK\Source\joystick\lib_joystick.c</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
           <GroupName>GLCD</GroupName>
           <Files>
             <File>
@@ -1160,6 +1155,41 @@
               <FileName>HzLib.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\Source\GLCD\HzLib.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>pacman</GroupName>
+          <Files>
+            <File>
+              <FileName>pacman.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Source\pacman\pacman.h</FilePath>
+            </File>
+            <File>
+              <FileName>funct_board.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\pacman\funct_board.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>joystick</GroupName>
+          <Files>
+            <File>
+              <FileName>lib_joystick.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\joystick\lib_joystick.c</FilePath>
+            </File>
+            <File>
+              <FileName>joystick.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Source\joystick\joystick.h</FilePath>
+            </File>
+            <File>
+              <FileName>funct_joystick.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\joystick\funct_joystick.c</FilePath>
             </File>
           </Files>
         </Group>
