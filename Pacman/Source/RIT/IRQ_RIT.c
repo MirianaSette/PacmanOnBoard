@@ -9,7 +9,7 @@
 *********************************************************************************************************/
 #include "LPC17xx.h"
 #include "RIT.h"
-#include "../led/led.h"
+#include "../pacman/pacman.h"
 
 /******************************************************************************
 ** Function name:		RIT_IRQHandler
@@ -42,7 +42,7 @@ void RIT_IRQHandler (void)
 		switch(J_up){
 			case 1:
 				// code J_up
-				LED_On(0); 
+				setDirection(UP);
 				break;
 			// code J_up when pressure is long 
 			case 60:	//3sec = 3000ms/50ms = 60

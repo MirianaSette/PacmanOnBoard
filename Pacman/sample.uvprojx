@@ -575,6 +575,11 @@
               <FileType>1</FileType>
               <FilePath>.\Source\pacman\funct_board.c</FilePath>
             </File>
+            <File>
+              <FileName>movement.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\pacman\movement.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1170,6 +1175,11 @@
               <FileName>funct_board.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\Source\pacman\funct_board.c</FilePath>
+            </File>
+            <File>
+              <FileName>movement.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\pacman\movement.c</FilePath>
             </File>
           </Files>
         </Group>

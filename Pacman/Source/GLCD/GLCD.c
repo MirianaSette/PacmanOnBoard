@@ -479,7 +479,7 @@ uint16_t LCD_GetPoint(uint16_t Xpos,uint16_t Ypos)
         default:	/* 0x9320 0x9325 0x9328 0x9331 0x5408 0x1505 0x0505 0x9919 */
              dummy = LCD_ReadData();   /* Empty read */
              dummy = LCD_ReadData(); 	
- 		     return  LCD_BGR2RGB( dummy );
+ 		     return  dummy;
 	}
 }
 
