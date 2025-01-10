@@ -6,22 +6,10 @@
 *********************************************************************************************************/
 
  
-#include "LPC17xx.h"
+
 #include "pacman.h"
 #include "GLCD/GLCD.h" 
-#include <stdbool.h>
-
-#define DIM_CELL 9
-#define ROWS 30
-#define COLUMNS 26
-#define IN 40
-#define EC 0					// Empty cell
-#define	SP 1					// Cell with standard pill
-#define	PP 2					// Cell with power pill
-#define	WC 3					// Wall cell
-#define TL 4 					// Teleport left 
-#define TR 5					// Teleport right 
-#define PC 6
+	
 
 volatile uint8_t board[ROWS][COLUMNS] = {
 	WC, WC, WC, WC, WC, WC, WC, WC, WC, WC, WC, WC, WC, WC, WC, WC, WC, WC, WC, WC, WC, WC, WC, WC, WC, WC,
@@ -34,7 +22,7 @@ volatile uint8_t board[ROWS][COLUMNS] = {
 	WC, SP, SP, SP, SP, SP, SP, WC, WC, SP, SP, SP, SP, SP, SP, SP, SP, WC, WC, SP, SP, SP, SP, SP, SP, WC, 
 	WC, WC, WC, WC, WC, WC, SP, WC, WC, SP, WC, WC, WC, WC, WC, WC, SP, WC, WC, SP, WC, WC, WC, WC, WC, WC, 
 	EC, EC, EC, EC, EC, WC, SP, WC, WC, SP, WC, WC, WC, WC, WC, WC, SP, WC, WC, SP, WC, EC, EC, EC, EC, EC,
-	EC, EC, EC, EC, EC, WC, SP, SP, SP, SP, SP, PC, EC, EC, EC, SP, SP, SP, SP, SP, WC, EC, EC, EC, EC, EC,
+	EC, EC, EC, EC, EC, WC, SP, SP, SP, SP, SP, EC, EC, EC, EC, SP, SP, SP, SP, SP, WC, EC, EC, EC, EC, EC,
 	EC, EC, EC, EC, EC, WC, SP, WC, WC, WC, SP, WC, WC, WC, WC, SP, WC, WC, WC, SP, WC, EC, EC, EC, EC, EC,
 	EC, EC, EC, EC, EC, WC, SP, WC, WC, WC, SP, WC, WC, WC, WC, SP, WC, WC, WC, SP, WC, EC, EC, EC, EC, EC,
 	WC, WC, WC, WC, WC, WC, SP, WC, WC, WC, SP, WC, WC, WC, WC, SP, WC, WC, WC, SP, WC, WC, WC, WC, WC, WC, 
@@ -54,7 +42,12 @@ volatile uint8_t board[ROWS][COLUMNS] = {
 	WC, SP, WC, WC, WC, WC, WC, WC, SP, WC, WC, WC, WC, WC, WC, WC, WC, SP, WC, WC, WC, WC, WC, WC, SP, WC,
 	WC, SP, SP, SP, SP, SP, SP, SP, SP, SP, SP, SP, SP, SP, SP, SP, SP, SP, SP, SP, SP, SP, SP, SP, SP, WC, 
 	WC, WC, WC, WC, WC, WC, WC, WC, WC, WC, WC, WC, WC, WC, WC, WC, WC, WC, WC, WC, WC, WC, WC, WC, WC, WC
-};
+};	
+	
+extern int score; 
+int time = 60; 
+extern int pill;
+
 
 void draw_wall(int i, int j){ 
 	
@@ -92,15 +85,15 @@ static void draw(int x0, int y0, int r, uint16_t color){
 	}
 }
 
-void drawPacman(int i, int j, bool clean) {
+void drawPacman(int i, int j, bool clean){
 	if (clean) {
-		draw((j*DIM_CELL)+5, (i*DIM_CELL)+5 + IN, 4,  Black);
+		draw((j*DIM_CELL)+5, (i*DIM_CELL)+5 + IN, 3,  Black);
 	} else {
-		draw((j*DIM_CELL)+5, (i*DIM_CELL)+5 + IN, 4 ,  Yellow);
+		draw((j*DIM_CELL)+5, (i*DIM_CELL)+5 + IN, 3 ,  Yellow);
 	}
 }
 
-void drawSPill(int i, int j, bool clean) {
+void drawSPill(int i, int j, bool clean){
 	if (clean) {
 		draw((j*DIM_CELL)+5, (i*DIM_CELL)+5 + IN, 1,  Black);
 	} else {
@@ -109,7 +102,7 @@ void drawSPill(int i, int j, bool clean) {
 	
 }
 
-void drawPPill(int i, int j, bool clean) {
+void drawPPill(int i, int j, bool clean){
 	if (clean) {
 		draw((j*DIM_CELL)+5, (i*DIM_CELL)+5 + IN, 2,  Black);
 	} else {
@@ -117,17 +110,23 @@ void drawPPill(int i, int j, bool clean) {
 	}
 }
 
+void replacePills(){
+	
+}
+
+
 void draw_board(){
 	int i, j;
 	LCD_Clear(Black);
+	GUI_Text(40, 2, (uint8_t*)"SCORE", White, Black); // y [2, 18]
+	GUI_Text(110, 2, (uint8_t*)"COUNTDOWN", White, Black); 
+	GUI_Text(130, 20, (uint8_t*)"60", White, Black); 
+	
 	for(i = 0; i < ROWS; i++){
 		for(j = 0; j < COLUMNS; j++){
 			switch(board[i][j]){
 				case SP:
 					drawSPill(i, j, false);
-					break;
-				case PC:
-					drawPacman(i, j, false);
 					break;
 				case WC:
 					draw_wall(i, j);
@@ -139,9 +138,53 @@ void draw_board(){
 	}
 }
 
+/*  */ 
+void showScore(){
+	char s[5]; 
+	sprintf(s, "%d", score); 
+	GUI_Text(40, 20, (uint8_t *)s, White, Black); 
+}
+
+void showTime(){
+	char s[5]; 
+	sprintf(s, "%d", time); 
+	GUI_Text(130, 20, (uint8_t *)s, White, Black); 
+}
+
+void freezeGame(){
+	disable_timer(0);
+	disable_timer(1);
+}
 
 
+void enable(){
+	enable_timer(0);
+	enable_timer(1);
 
+}
 
+void showGameOver(){
+	if(time == 0){
+		freezeGame();
+		LCD_Clear(Black);
+		GUI_Text(80, 152, (uint8_t *)"GAME OVER", White, Black);
+	}
+}
 
+void showVictory(){
+	if(pill == 240){
+		freezeGame();
+		LCD_Clear(Black);
+		GUI_Text(88, 152, (uint8_t *)"VICTORY", White, Black);
+	}
+}
 
+void showPause(){
+	freezeGame();
+	GUI_Text(180, 22, (uint8_t *)"PAUSE", White, Black);
+}
+
+void disablePause(){
+	GUI_Text(180, 22, (uint8_t *)"PAUSE", Black, Black);
+	enable();
+}

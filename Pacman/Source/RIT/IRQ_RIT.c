@@ -9,6 +9,7 @@
 *********************************************************************************************************/
 #include "LPC17xx.h"
 #include "RIT.h"
+#include "timer.h"
 #include "../pacman/pacman.h"
 
 /******************************************************************************
@@ -23,7 +24,7 @@
 volatile int down_0 = 0;
 volatile int down_1 = 0;
 volatile int down_2 = 0;
-
+bool pause = 0;
 
 void RIT_IRQHandler (void)
 {			
@@ -64,7 +65,7 @@ void RIT_IRQHandler (void)
 		switch(J_down){
 			case 1:
 				// code J_down
-				LED_On(1); 
+				setDirection(DOWN); 
 				break;
 			// code J_down when pressure is long 
 			case 60:	//3sec = 3000ms/50ms = 60
@@ -86,7 +87,7 @@ void RIT_IRQHandler (void)
 		switch(J_left){
 			case 1:
 				// code J_left
-				LED_On(2); 
+				setDirection(LEFT); 
 				break;
 			// code J_left when pressure is long 
 			case 60:	//3sec = 3000ms/50ms = 60
@@ -108,7 +109,7 @@ void RIT_IRQHandler (void)
 		switch(J_right){
 			case 1:
 				// code J_right
-				LED_On(3); 
+				setDirection(RIGHT); 
 				break;
 			// code J_right when pressure is long 
 			case 60:	//3sec = 3000ms/50ms = 60
@@ -129,7 +130,13 @@ void RIT_IRQHandler (void)
 			switch(down_0){
 				case 2:					// lasciare 2 ai bottoni: serve a non elaborare più volte il segnale. 
 					// code button 0 here 
-				
+					if(pause == 0){
+						showPause();
+						pause = 1;
+					}else{
+						disablePause();
+						pause = 0;
+					}
 					break;
 				default:
 					break;

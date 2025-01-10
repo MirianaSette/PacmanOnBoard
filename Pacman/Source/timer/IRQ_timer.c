@@ -9,9 +9,12 @@
 *********************************************************************************************************/
 #include "LPC17xx.h"
 #include "timer.h"
+#include "pacman/pacman.h"
 #include "../led/led.h"
 #include "../GLCD/GLCD.h" 
 #include <stdio.h> /*for sprintf*/
+
+
 
 /******************************************************************************
 ** Function name:		Timer0_IRQHandler
@@ -23,6 +26,8 @@
 **
 ******************************************************************************/
 extern unsigned char led_value;					/* defined in funct_led								*/
+extern int time;
+extern int rTime;
 
 unsigned char ledval = 0xA5;
 
@@ -31,7 +36,7 @@ void TIMER0_IRQHandler (void)
 	if(LPC_TIM0->IR & 1) // MR0
 	{ 
 		// your code - Refresh touch 
-		
+		moveP();
 		LPC_TIM0->IR = 1;			//clear interrupt flag
 	}
 	else if(LPC_TIM0->IR & 2){ // MR1
@@ -68,6 +73,11 @@ void TIMER1_IRQHandler (void)
 	if(LPC_TIM1->IR & 1) // MR0
 	{ 
 		// your code 
+		time--;
+		showTime();
+		if(rTime == time){
+			replacePills();
+		}
 		
 		LPC_TIM1->IR = 1;			//clear interrupt flag
 	}
