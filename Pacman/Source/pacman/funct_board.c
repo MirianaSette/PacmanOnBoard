@@ -44,8 +44,10 @@ volatile uint8_t board[ROWS][COLUMNS] = {
 	WC, WC, WC, WC, WC, WC, WC, WC, WC, WC, WC, WC, WC, WC, WC, WC, WC, WC, WC, WC, WC, WC, WC, WC, WC, WC
 };	
 	
-extern int score; 
+int coord[480];   	// array with standard pills coordinate
 int time = 60; 
+
+extern int score; 
 extern int pill;
 
 
@@ -111,7 +113,33 @@ void drawPPill(int i, int j, bool clean){
 }
 
 void replacePills(){
+	int y, x;
+	int i = 0;
+	int ncoord;									// n remaining coord
+	int r;
 	
+	for(y = 0; y < ROWS; y++){
+		for(x = 0; x < COLUMNS; x++){
+			if(board[y][x] == SP){
+				coord[i] = y;
+				coord[i+1] = x;
+				i+=2;
+			}
+		}
+	}
+	ncoord = (240 - pill) * 2;
+	for(i = 0; i < 6; i++){
+		r = rand() % ncoord;
+		if(r % 2 == 1){
+			x = coord[r];
+			y = coord[r-1];
+		}else{
+			x = coord[r+1];
+			y = coord[r];
+		}
+		drawPPill(y, x, false);
+		board[y][x] = PP;
+	}
 }
 
 
@@ -146,8 +174,10 @@ void showScore(){
 }
 
 void showTime(){
-	char s[5]; 
+	char s[2]; 
 	sprintf(s, "%d", time); 
+	if (time < 10)
+		s[1] = s[0]; 
 	GUI_Text(130, 20, (uint8_t *)s, White, Black); 
 }
 

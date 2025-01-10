@@ -52,7 +52,7 @@ int main (void) {
 	init_timer(0, 0, 0, 3, 0x7A120);			// 15 ms 0x7A120
 	enable_timer(0);
 	
-	init_timer(1, 0, 0, 3, 0x17D7840);
+	init_timer(1, 0, 0, 3, 0x17D7840*0.2);		//0.063
 	enable_timer(1);
 	
 	srand(LPC_TIM0->TC ^ LPC_TIM1->TC);
