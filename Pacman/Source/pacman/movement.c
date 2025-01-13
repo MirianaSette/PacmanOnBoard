@@ -55,6 +55,7 @@ void upLife(){
   }
 }
 	
+/* Definition of function that allows the movement of pacman */
 
 void moveP(void){
 	switch(direction){

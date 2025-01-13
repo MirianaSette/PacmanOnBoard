@@ -50,6 +50,7 @@ int time = 60;
 extern int score; 
 extern int pill;
 
+/* Definition of a series of function that draw the components of bord */
 
 void draw_wall(int i, int j){ 
 	
@@ -144,7 +145,7 @@ void replacePills(){
 
 
 void draw_board(){
-	int i, j;
+	int i, j;																					// i = y    j = x
 	LCD_Clear(Black);
 	GUI_Text(40, 2, (uint8_t*)"SCORE", White, Black); // y [2, 18]
 	GUI_Text(110, 2, (uint8_t*)"COUNTDOWN", White, Black); 
@@ -166,7 +167,8 @@ void draw_board(){
 	}
 }
 
-/*  */ 
+/* Definition of a series of function that show the differents states of the game */ 
+
 void showScore(){
 	char s[5]; 
 	sprintf(s, "%d", score); 
@@ -176,8 +178,10 @@ void showScore(){
 void showTime(){
 	char s[2]; 
 	sprintf(s, "%d", time); 
-	if (time < 10)
+	if (time < 10){
 		s[1] = s[0]; 
+		s[0] = '0';
+	}
 	GUI_Text(130, 20, (uint8_t *)s, White, Black); 
 }
 
@@ -186,11 +190,9 @@ void freezeGame(){
 	disable_timer(1);
 }
 
-
 void enable(){
 	enable_timer(0);
 	enable_timer(1);
-
 }
 
 void showGameOver(){
